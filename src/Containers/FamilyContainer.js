@@ -1,11 +1,13 @@
 import React from 'react'
+import FamilyComponent from '../Components/FamilyComponent'
 
 class FamilyContainer extends React.Component {
 
     render(){
         return(
             <>
-                <h2>family container</h2>
+                <h1>family container</h1>
+                <FamilyComponent />
             </>
         )
     }

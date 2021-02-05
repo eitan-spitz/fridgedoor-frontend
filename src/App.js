@@ -7,6 +7,29 @@ import FamilyContainer from './Containers/FamilyContainer';
 
 class App extends React.Component {
 
+  state = {
+    query: "cheese"
+  }
+
+  fdcData = {
+    url: "https://api.nal.usda.gov/fdc/v1/foods/search?",
+    apiKey: "CS1Rfy9P2MqeJeHkcNnhBjhyMBJ9d6G5cUSdkOAu",
+    query: this.state.query,
+    pageSize: 5
+  }
+  
+  componentDidMount(){
+    fetch(`${this.fdcData.url}api_key=${this.fdcData.apiKey}&query=${this.fdcData.query}&pageSize=${this.fdcData.pageSize}`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-type": "application/json"
+      }
+    })
+    .then(r => r.json())
+    .then(returnedData => console.log(returnedData))
+  }
+
   render(){
     return (
       <div className="App">
