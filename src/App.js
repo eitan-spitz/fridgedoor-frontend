@@ -3,7 +3,8 @@ import React from 'react';
 import FamilyContainer from './Containers/FamilyContainer';
 // import {URL} from './index'
 // import { Route, Switch } from 'react-router-dom';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+import { loginUser } from './Redux/actions';
 
 class App extends React.Component {
 
@@ -19,15 +20,16 @@ class App extends React.Component {
   }
   
   componentDidMount(){
-    fetch(`${this.fdcData.url}api_key=${this.fdcData.apiKey}&query=${this.fdcData.query}&pageSize=${this.fdcData.pageSize}`, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "Content-type": "application/json"
-      }
-    })
-    .then(r => r.json())
-    .then(returnedData => console.log(returnedData))
+    // fetch(`${this.fdcData.url}api_key=${this.fdcData.apiKey}&query=${this.fdcData.query}&pageSize=${this.fdcData.pageSize}`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Accept": "application/json",
+    //     "Content-type": "application/json"
+    //   }
+    // })
+    // .then(r => r.json())
+    // .then(returnedData => console.log(returnedData))
+      this.props.login()
   }
 
   render(){
@@ -40,4 +42,16 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function msp(state){
+  return{
+    user: state.user
+  }
+}
+
+function mdp(dispatch){
+  return {
+    login: () => dispatch(loginUser())
+  }
+}
+
+export default connect(msp, mdp)(App);
