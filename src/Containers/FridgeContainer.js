@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import FdcSearch from '../Components/FdcSearch'
 import FridgeItem from '../Components/FridgeItem'
 
 class FridgeContainer extends React.Component {
@@ -25,6 +26,7 @@ class FridgeContainer extends React.Component {
         return(
             <>
                 <h2>{this.props.fridge.name}</h2>
+                <FdcSearch />
                 {this.arrayOfItems()}
             </>
         )
