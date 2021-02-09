@@ -2,9 +2,10 @@ import './App.css';
 import React from 'react';
 import FamilyContainer from './Containers/FamilyContainer';
 // import {URL} from './index'
-// import { Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { loginUser } from './Redux/actions';
+
 
 class App extends React.Component {
 
@@ -35,8 +36,17 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <h1>hello from app</h1>
-        <FamilyContainer />
+      <Switch>
+        <Route path='/home' render={ () => {
+          return(
+            <>
+              <h1>hello from app</h1>
+              <NavLink to='/families' >Families</NavLink>
+            </>
+          )
+        }} />
+        <Route path='/families' component={FamilyContainer} />
+      </Switch>
       </div>
     )
   }

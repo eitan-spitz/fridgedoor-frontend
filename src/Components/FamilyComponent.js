@@ -6,7 +6,8 @@ import ShoppinglistContainer from '../Containers/ShoppinglistContainer'
 class FamilyComponent extends React.Component {
 
     state = {
-        fridges: []
+        fridges: [],
+        familyId: null
     }
 
     componentDidMount(){
@@ -22,14 +23,14 @@ class FamilyComponent extends React.Component {
             .then(r=>r.json())
             .then(fridges => {
                 console.log(fridges)
-                this.setState({fridges})
+                this.setState({fridges: fridges, familyId: userFamily})
             })
             .catch(console.log)
         }
     }
 
     arrayOfFridges = () => {
-        return this.state.fridges.map(fridge => <FridgeContainer fridge={fridge} />)
+        return this.state.fridges.map(fridge => <FridgeContainer fridge={fridge} familyId={this.state.familyId} />)
     }
 
     render(){

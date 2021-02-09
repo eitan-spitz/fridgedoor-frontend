@@ -1,12 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import FdcSearch from '../Components/FdcSearch'
 import FridgeItem from '../Components/FridgeItem'
 
 class FridgeContainer extends React.Component {
 
     arrayOfItems = () => {
-        return this.props.fridge.fridge_items.map(item => <FridgeItem item={item} />)
+        return this.props.fridge.items.map(item => <FridgeItem item={item} deleteItem={this.deleteItem} />)
+    }
+
+    deleteItem = (itemObj) => {
+        let fridgeItemToDelete = this.props.fridge.fridge_items.find(fridgeItem => fridgeItem.item_id === itemObj.id)
+        fetch(`http://localhost:3000/families/${this.props.familyId}/fridges/${this.props.fridge.id}/fridge_items/${fridgeItemToDelete.id}`,{
+            method: "DELETE",
+            headers: {
+                "Accepts": "application/json",
+                "Content-type": "application/json",
+            }
+        })
+        .then(r=>r.json())
+        .then(resp => console.log(resp))
     }
 
     render(){
