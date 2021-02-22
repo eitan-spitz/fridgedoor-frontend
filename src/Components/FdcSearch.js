@@ -5,7 +5,8 @@ class FdcSearch extends React.Component {
 
     state = {
         query: '',
-        apiResponse: []
+        apiResponse: null,
+        fetched: false
     }
 
     fdcData = {
@@ -14,16 +15,18 @@ class FdcSearch extends React.Component {
         pageSize: 10
       }
       
-    componentDidMount(){
-    
+    componentDidUpdate(){
+        if(!this.state.fetched){
+            if(this.state.query.length >= 4 ){
+                console.log('length over 4')
+                this.searchHelper()
+            }
+        }
     }
 
     changeHandler = (e) => {
-        this.setState({ [e.target.name]: e.target.value})
-        if(this.state.query.length >= 4 ){
-            console.log('length over 4')
-            this.searchHelper()
-        }
+        console.log('working')
+        this.setState({ [e.target.name]: e.target.value, fetched: false})
     }
 
     searchHelper = () => {
@@ -42,7 +45,7 @@ class FdcSearch extends React.Component {
         .then(r => r.json())
         .then(returnedData => {
             console.log(returnedData)
-            this.setState({apiResponse: returnedData.foods})
+            this.setState({apiResponse: returnedData.foods, fetched: true})
         })
     }
     
@@ -51,11 +54,23 @@ class FdcSearch extends React.Component {
 
     }
 
+    prepFoodsForDropdown = () => {
+        let options = []
+        if(this.state.apiResponse){
+            this.state.apiResponse.foods.map(food => {
+                food.name = food.description
+                food.value = food.description
+                return food
+            })
+        }
+        return options
+    }
+
     render(){
         return(
             <form onSubmit={this.localSubmitHandler} className="form" >
-                <input type="text" name="query" placeholder="Search Food Database" value={this.state.query} onChange={this.changeHandler} />
-                
+                {/* <input type="text" name="query" placeholder="Search Food Database" value={this.state.query} onChange={this.changeHandler} /> */}
+                <SelectSearch options={this.prepFoodsForDropdown()} onChange={this.changeHandler} search={true} placeholder="Search Food Database" value={this.state.query}  />
                 <button>Search</button>
             </form>
         )
