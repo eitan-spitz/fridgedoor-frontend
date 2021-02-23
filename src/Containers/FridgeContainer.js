@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import FdcSearch from '../Components/FdcSearch'
+import { Route, Switch, NavLink } from 'react-router-dom'
+import SearchContainer from './SearchContainer'
 import FridgeItem from '../Components/FridgeItem'
 
 class FridgeContainer extends React.Component {
@@ -25,9 +26,18 @@ class FridgeContainer extends React.Component {
     render(){
         return(
             <>
-                <h2>{this.props.fridge.name}</h2>
-                <FdcSearch />
-                {this.arrayOfItems()}
+            <Switch>
+                <Route path='/' render={()=> {
+                    return(
+                        <>
+                        <h2>{this.props.fridge.name}</h2>
+                        <button><NavLink to='/add_item' >Add Item</NavLink></button>
+                        {this.arrayOfItems()}
+                        </>
+                    )
+                }} />
+                <Route path='/add_item' component={SearchContainer} />
+            </Switch>
             </>
         )
     }

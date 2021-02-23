@@ -1,5 +1,4 @@
 import React from 'react'
-import SelectSearch from 'react-select-search'
 
 class FdcSearch extends React.Component {
 
@@ -19,7 +18,7 @@ class FdcSearch extends React.Component {
         if(!this.state.fetched){
             if(this.state.query.length >= 4 ){
                 console.log('length over 4')
-                this.searchHelper()
+                this.searchFetch()
             }
         }
     }
@@ -27,10 +26,6 @@ class FdcSearch extends React.Component {
     changeHandler = (e) => {
         console.log('working')
         this.setState({ [e.target.name]: e.target.value, fetched: false})
-    }
-
-    searchHelper = () => {
-        this.searchFetch()
     }
     
     searchFetch = () => {
@@ -54,25 +49,15 @@ class FdcSearch extends React.Component {
 
     }
 
-    prepFoodsForDropdown = () => {
-        let options = []
-        if(this.state.apiResponse){
-            this.state.apiResponse.foods.map(food => {
-                food.name = food.description
-                food.value = food.description
-                return food
-            })
-        }
-        return options
-    }
-
     render(){
         return(
+            <>
             <form onSubmit={this.localSubmitHandler} className="form" >
-                {/* <input type="text" name="query" placeholder="Search Food Database" value={this.state.query} onChange={this.changeHandler} /> */}
-                <SelectSearch options={this.prepFoodsForDropdown()} onChange={this.changeHandler} search={true} placeholder="Search Food Database" value={this.state.query}  />
+                <input type="text" name="query" placeholder="Search Food Database" value={this.state.query} onChange={this.changeHandler} />
                 <button>Search</button>
             </form>
+            {this.state.apiResponse}
+            </>
         )
     }
 }
