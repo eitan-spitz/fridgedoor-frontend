@@ -1,4 +1,5 @@
 import React from 'react'
+import FdcItem from '../Components/FdcItem'
 import FdcSearch from '../Components/FdcSearch'
 
 class SearchContainer extends React.Component {
@@ -16,7 +17,6 @@ class SearchContainer extends React.Component {
       }
 
     changeHandler = (e)=> {
-        console.log('working')
         this.setState({ [e.target.name]: e.target.value, fetched: false})
     }
     searchFetch = () => {
@@ -35,13 +35,20 @@ class SearchContainer extends React.Component {
         })
     }
 
+    formatFoods = () => {
+        if(this.state.apiResponse){
+            console.log("in format foods")
+            let arrayOfFoods = this.state.apiResponse.map((food) => {return <FdcItem food={food} />})
+            return arrayOfFoods
+        }
+    }
+
     render(){
-        console.log(this.props)
         return(
             <>
                 <button onClick={this.props.history.goBack}>go back</button>
                 <FdcSearch query={this.state.query} fetched={this.state.fetched} changeHandler={this.changeHandler} searchFetch={this.searchFetch} />
-                
+                {this.formatFoods()}
             </>
         )
     }
