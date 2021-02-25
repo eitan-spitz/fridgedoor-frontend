@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
 import FridgeContainer from '../Containers/FridgeContainer'
 import ShoppinglistContainer from '../Containers/ShoppinglistContainer'
 
@@ -37,8 +38,16 @@ class FamilyComponent extends React.Component {
         return(
             <>
                 <h2>Family component</h2>
-                {this.arrayOfFridges()}
-                <ShoppinglistContainer />
+                <Switch>
+                    <Route path="/families/fridge" render={()=>{
+                        return(
+                            <>
+                                {this.arrayOfFridges()}
+                            </>
+                        )
+                    }} />
+                    <Route path="/families/shopping" component={ShoppinglistContainer} />
+                </Switch>
             </>
         )
     }

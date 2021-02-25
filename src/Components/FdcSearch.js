@@ -54,9 +54,7 @@ class FdcSearch extends React.Component {
             <>
             <form onSubmit={this.localSubmitHandler} className="form" >
                 <input type="text" name="query" placeholder="Search Food Database" value={this.state.query} onChange={this.changeHandler} />
-                <button>Search</button>
             </form>
-            {this.state.apiResponse}
             </>
         )
     }

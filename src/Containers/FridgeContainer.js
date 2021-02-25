@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, NavLink } from 'react-router-dom'
-import SearchContainer from './SearchContainer'
 import FridgeItem from '../Components/FridgeItem'
 
 class FridgeContainer extends React.Component {
@@ -27,7 +26,7 @@ class FridgeContainer extends React.Component {
         return(
             <>
             <Switch>
-                <Route path='/' render={()=> {
+                <Route path='/families/fridge' render={()=> {
                     return(
                         <>
                         <h2>{this.props.fridge.name}</h2>
@@ -36,7 +35,6 @@ class FridgeContainer extends React.Component {
                         </>
                     )
                 }} />
-                <Route path='/add_item' component={SearchContainer} />
             </Switch>
             </>
         )

@@ -1,8 +1,9 @@
 import './App.css';
 import React from 'react';
 import FamilyContainer from './Containers/FamilyContainer';
+import SearchContainer from './Containers/SearchContainer'
 // import {URL} from './index'
-import { NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { loginUser } from './Redux/actions';
 
@@ -41,11 +42,12 @@ class App extends React.Component {
           return(
             <>
               <h1>hello from app</h1>
-              <NavLink to='/families' >Families</NavLink>
+              <NavLink to='/families/fridge' >Fridge of Families</NavLink>
             </>
           )
         }} />
         <Route path='/families' component={FamilyContainer} />
+        <Route path='/add_item' component={SearchContainer} />
       </Switch>
       </div>
     )
@@ -64,4 +66,4 @@ function mdp(dispatch){
   }
 }
 
-export default connect(msp, mdp)(App);
+export default withRouter(connect(msp, mdp)(App));
