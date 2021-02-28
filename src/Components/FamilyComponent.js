@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import FridgeContainer from '../Containers/FridgeContainer'
+import SearchContainer from '../Containers/SearchContainer'
 import ShoppinglistContainer from '../Containers/ShoppinglistContainer'
 
 class FamilyComponent extends React.Component {
@@ -30,6 +31,10 @@ class FamilyComponent extends React.Component {
         }
     }
 
+    addItem = (itemId) => {
+        console.log(itemId)
+    }
+
     arrayOfFridges = () => {
         return this.state.fridges.map(fridge => <FridgeContainer fridge={fridge} familyId={this.state.familyId} />)
     }
@@ -37,12 +42,19 @@ class FamilyComponent extends React.Component {
     render(){
         return(
             <>
-                <h2>Family component</h2>
+                {/* <h2>Family component (inside family - choice of fridges or shopping list)</h2> */}
                 <Switch>
                     <Route path="/families/fridge" render={()=>{
                         return(
                             <>
-                                {this.arrayOfFridges()}
+                                <div className="container">
+                                    <div className="fridge">
+                                        {this.arrayOfFridges()}
+                                    </div>
+                                    <div className="search">
+                                        <SearchContainer addItem={this.addItem} />
+                                    </div>
+                                </div>
                             </>
                         )
                     }} />

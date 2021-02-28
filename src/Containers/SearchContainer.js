@@ -38,7 +38,7 @@ class SearchContainer extends React.Component {
     formatFoods = () => {
         if(this.state.apiResponse){
             console.log("in format foods")
-            let arrayOfFoods = this.state.apiResponse.map((food) => {return <FdcItem food={food} />})
+            let arrayOfFoods = this.state.apiResponse.map((food) => {return <FdcItem food={food} addItem={this.props.addItem} />})
             return arrayOfFoods
         }
     }
@@ -46,7 +46,6 @@ class SearchContainer extends React.Component {
     render(){
         return(
             <>
-                <button onClick={this.props.history.goBack}>go back</button>
                 <FdcSearch query={this.state.query} fetched={this.state.fetched} changeHandler={this.changeHandler} searchFetch={this.searchFetch} />
                 {this.formatFoods()}
             </>

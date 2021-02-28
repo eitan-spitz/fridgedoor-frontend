@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route, Switch, NavLink } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import FridgeItem from '../Components/FridgeItem'
 
 class FridgeContainer extends React.Component {
 
     arrayOfItems = () => {
-        return this.props.fridge.items.map(item => <FridgeItem item={item} deleteItem={this.deleteItem} />)
+        return this.props.fridge.items.map(item => <FridgeItem item={item} deleteItem={this.deleteItem} key={item.id} />)
     }
 
     deleteItem = (itemObj) => {
@@ -30,7 +30,6 @@ class FridgeContainer extends React.Component {
                     return(
                         <>
                         <h2>{this.props.fridge.name}</h2>
-                        <button><NavLink to='/add_item' >Add Item</NavLink></button>
                         {this.arrayOfItems()}
                         </>
                     )
