@@ -7,7 +7,7 @@ class FdcItem extends React.Component {
     }
 
     clickHandler = ()=> {
-        this.props.addItem(this.state.fdcId)
+        this.props.addItem(this.props.food)
     }
 
     render(){

@@ -31,8 +31,20 @@ class FamilyComponent extends React.Component {
         }
     }
 
-    addItem = (itemId) => {
-        console.log(itemId)
+    addItem = (itemObj) => {
+        console.log(itemObj)
+        fetch(`http://localhost:3000/items`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({fdc_id: itemObj.fdcId, fdc_description: itemObj.description, data_type: itemObj.dataType})
+        })
+        .then(r=>r.json())
+        .then(item => {
+            console.log(item)
+        })
     }
 
     arrayOfFridges = () => {
