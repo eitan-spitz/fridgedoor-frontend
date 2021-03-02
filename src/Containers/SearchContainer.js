@@ -38,7 +38,7 @@ class SearchContainer extends React.Component {
     formatFoods = () => {
         if(this.state.apiResponse){
             console.log("in format foods")
-            let arrayOfFoods = this.state.apiResponse.map((food) => {return <FdcItem food={food} addItem={this.props.addItem} />})
+            let arrayOfFoods = this.state.apiResponse.map((food) => {return <FdcItem food={food} addItem={this.props.addItem} key={food.fdcId} />})
             return arrayOfFoods
         }
     }

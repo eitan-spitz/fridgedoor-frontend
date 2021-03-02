@@ -44,11 +44,29 @@ class FamilyComponent extends React.Component {
         .then(r=>r.json())
         .then(item => {
             console.log(item)
+            this.createFridgeItem(item)
+            .then(r=>r.json())
+            .then(fridgeItem => {
+                console.log(fridgeItem)
+            })
+        })
+    }
+
+    createFridgeItem = (itemObj) => {
+        let userFamily = this.props.user.user_families[0].family_id
+        let fridgeId = this.state.fridges[0].id
+        return fetch(`http://localhost:3000/families/${userFamily}/fridges/${fridgeId}/fridge_items`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({fridge_id: fridgeId, item_id: itemObj.id})
         })
     }
 
     arrayOfFridges = () => {
-        return this.state.fridges.map(fridge => <FridgeContainer fridge={fridge} familyId={this.state.familyId} />)
+        return this.state.fridges.map(fridge => <FridgeContainer fridge={fridge} familyId={this.state.familyId} key={fridge.id} />)
     }
 
     render(){

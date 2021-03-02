@@ -5,6 +5,10 @@ import FridgeItem from '../Components/FridgeItem'
 
 class FridgeContainer extends React.Component {
 
+    state = {
+        items: []
+    }
+
     arrayOfItems = () => {
         return this.props.fridge.items.map(item => <FridgeItem item={item} deleteItem={this.deleteItem} key={item.id} />)
     }
