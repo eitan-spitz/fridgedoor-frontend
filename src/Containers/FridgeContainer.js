@@ -12,6 +12,7 @@ class FridgeContainer extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         this.setState({ items: this.props.fridge.items, fridgeItems: this.props.fridge.fridge_items })
     }
 

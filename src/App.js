@@ -43,7 +43,7 @@ class App extends React.Component {
         <Route path='/home' render={ () => {
           return(
             <>
-              <h1>hello from app</h1>
+              <h1>FridgeDoor</h1>
             </>
           )
         }} />

@@ -13,9 +13,10 @@ class FdcItem extends React.Component {
     render(){
         return(
             <>
-            <div onClick={this.clickHandler}>
+            <div>
                 <h4>{this.props.food.description.toLowerCase()}</h4>
                 <h6>{this.props.food.dataType}</h6>
+                <button onClick={this.clickHandler} >Add to Fridge</button>
             </div>
             </>
         )

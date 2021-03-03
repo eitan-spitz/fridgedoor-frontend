@@ -10,6 +10,7 @@ const Navbar = (props) => {
             </div>
             <div className="nav-buttons">
                 <NavLink to='/families/fridges' >Fridges</NavLink>
+                <NavLink to='/families/shopping' >Shopping List</NavLink>
                 <NavLink to='/home' >Home </NavLink>
             </div>
         </div>
