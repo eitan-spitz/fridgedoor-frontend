@@ -3,9 +3,10 @@ import React from 'react';
 import FamilyContainer from './Containers/FamilyContainer';
 import SearchContainer from './Containers/SearchContainer'
 // import {URL} from './index'
-import { NavLink, Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { loginUser } from './Redux/actions';
+import Navbar from './Components/Navbar';
 
 
 class App extends React.Component {
@@ -37,12 +38,12 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
+      <Navbar />
       <Switch>
         <Route path='/home' render={ () => {
           return(
             <>
               <h1>hello from app</h1>
-              <NavLink to='/families/fridge' >Fridge of Families</NavLink>
             </>
           )
         }} />

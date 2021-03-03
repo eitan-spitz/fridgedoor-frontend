@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import FridgeContainer from '../Containers/FridgeContainer'
-import SearchContainer from '../Containers/SearchContainer'
 import ShoppinglistContainer from '../Containers/ShoppinglistContainer'
+import FridgeCard from './FridgeCard'
 
 class FamilyComponent extends React.Component {
 
@@ -31,42 +31,10 @@ class FamilyComponent extends React.Component {
         }
     }
 
-    addItem = (itemObj) => {
-        console.log(itemObj)
-        fetch(`http://localhost:3000/items`, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({fdc_id: itemObj.fdcId, fdc_description: itemObj.description, data_type: itemObj.dataType})
-        })
-        .then(r=>r.json())
-        .then(item => {
-            console.log(item)
-            this.createFridgeItem(item)
-            .then(r=>r.json())
-            .then(fridgeItem => {
-                console.log(fridgeItem)
-            })
-        })
-    }
 
-    createFridgeItem = (itemObj) => {
-        let userFamily = this.props.user.user_families[0].family_id
-        let fridgeId = this.state.fridges[0].id
-        return fetch(`http://localhost:3000/families/${userFamily}/fridges/${fridgeId}/fridge_items`, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({fridge_id: fridgeId, item_id: itemObj.id})
-        })
-    }
 
-    arrayOfFridges = () => {
-        return this.state.fridges.map(fridge => <FridgeContainer fridge={fridge} familyId={this.state.familyId} key={fridge.id} />)
+    arrayOfFridgeCards = () => {
+        return this.state.fridges.map(fridge => <FridgeCard fridge={fridge} familyId={this.state.familyId} key={fridge.id} />)
     }
 
     render(){
@@ -74,18 +42,23 @@ class FamilyComponent extends React.Component {
             <>
                 {/* <h2>Family component (inside family - choice of fridges or shopping list)</h2> */}
                 <Switch>
-                    <Route path="/families/fridge" render={()=>{
+                    <Route path="/families/fridges/:id" render={(routerProps)=>{
+                        const fridgeId = routerProps.match.params.id
+                        const foundFridge = this.state.fridges.find(fridge => fridge.id === parseInt(fridgeId))
+                        console.log("fridgeid: ", fridgeId, ", fridge: ", foundFridge)
+                        let fridgeComponent
+                        if(foundFridge){
+                            fridgeComponent = <FridgeContainer fridge={foundFridge} familyId={this.state.familyId} key={foundFridge.id} />
+                        } else {
+                            fridgeComponent = <h1>Loading</h1>
+                        }
+                        return fridgeComponent
+                    }} />
+                    <Route path="/families/fridges" render={()=>{
                         return(
-                            <>
-                                <div className="container">
-                                    <div className="fridge">
-                                        {this.arrayOfFridges()}
-                                    </div>
-                                    <div className="search">
-                                        <SearchContainer addItem={this.addItem} />
-                                    </div>
-                                </div>
-                            </>
+                            <div>
+                                {this.arrayOfFridgeCards()}
+                            </div>
                         )
                     }} />
                     <Route path="/families/shopping" component={ShoppinglistContainer} />
@@ -101,4 +74,4 @@ function msp(state){
     }
 }
 
-export default connect(msp, null) (FamilyComponent)
+export default withRouter(connect(msp, null)(FamilyComponent))
