@@ -14,7 +14,7 @@ body{
     "footer footer footer";
 }
 
-.fridge{
+.fridge, .shoppinglist{
   grid-area: main;
 }
 

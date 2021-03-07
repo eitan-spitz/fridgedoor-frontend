@@ -13,15 +13,18 @@ class FridgeContainer extends React.Component {
 
     componentDidMount() {
         console.log(this.props)
-        this.setState({ items: this.props.fridge.items, fridgeItems: this.props.fridge.fridge_items })
+        this.setState({ items: this.props.fridge.items, fridgeItems: this.props.fridge.fridgeItems })
     }
 
     arrayOfItems = () => {
-        return this.state.items.map(item => <FridgeItem item={item} deleteItem={this.deleteItem} key={item.id} />)
+        return this.state.fridgeItems.map(fridgeItem => {
+            let item = this.state.items.find(item => item.id === fridgeItem.itemId)
+            return <FridgeItem fridgeItem={fridgeItem} deleteItem={this.deleteItem} key={fridgeItem.id} item={item} />
+        })
     }
 
     deleteItem = (itemObj) => {
-        let fridgeItemToDelete = this.state.fridgeItems.find(fridgeItem => fridgeItem.item_id === itemObj.id)
+        let fridgeItemToDelete = this.state.fridgeItems.find(fridgeItem => fridgeItem.itemId === itemObj.id)
         fetch(`http://localhost:3000/families/${this.props.familyId}/fridges/${this.props.fridge.id}/fridge_items/${fridgeItemToDelete.id}`, {
             method: "DELETE",
             headers: {
