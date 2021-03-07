@@ -38,6 +38,7 @@ class FridgeContainer extends React.Component {
 
     addItem = (itemObj) => {
         console.log(itemObj)
+
         fetch(`http://localhost:3000/items`, {
             method: "POST",
             headers: {
@@ -69,21 +70,25 @@ class FridgeContainer extends React.Component {
         })
     }
 
+
     render() {
         return (
             <>
                 <Switch>
                     <Route path='/families/fridges/:id' render={() => {
                         return (
+                            <>
                             <div className="container">
                                 <div className="fridge">
                                     <h2>{this.props.fridge.name}</h2>
                                     {this.arrayOfItems()}
                                 </div>
                                 <div className="search">
-                                    <SearchContainer addItem={this.addItem} />
+                                    <SearchContainer addItem={this.addItem} modalController={this.modalController} />
                                 </div>
                             </div>
+
+                            </>
                         )
                     }} />
                 </Switch>

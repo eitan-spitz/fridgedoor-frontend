@@ -1,13 +1,15 @@
 import React from 'react'
 import FdcItem from '../Components/FdcItem'
 import FdcSearch from '../Components/FdcSearch'
+import ReactModal from 'react-modal'
 
 class SearchContainer extends React.Component {
 
     state = {
         query: '',
         apiResponse: null,
-        fetched: false
+        fetched: false,
+        showModal: false
     }
 
     fdcData = {
@@ -37,10 +39,15 @@ class SearchContainer extends React.Component {
 
     formatFoods = () => {
         if(this.state.apiResponse){
-            console.log("in format foods")
-            let arrayOfFoods = this.state.apiResponse.map((food) => {return <FdcItem food={food} addItem={this.props.addItem} key={food.fdcId} />})
+            let arrayOfFoods = this.state.apiResponse.map((food) => {return <FdcItem food={food} addItem={this.props.addItem} key={food.fdcId} modalController={this.modalController} />})
             return arrayOfFoods
         }
+    }
+
+
+    modalController = ()=>{
+        console.log(this.state.showModal)
+        this.setState({showModal: !this.state.showModal})
     }
 
     render(){
@@ -48,6 +55,7 @@ class SearchContainer extends React.Component {
             <>
                 <FdcSearch query={this.state.query} fetched={this.state.fetched} changeHandler={this.changeHandler} searchFetch={this.searchFetch} />
                 {this.formatFoods()}
+                <ReactModal isOpen={this.state.showModal} onRequestClose={this.modalController} ariaHideApp={false} />
             </>
         )
     }

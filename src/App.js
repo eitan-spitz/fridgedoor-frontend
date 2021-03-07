@@ -37,7 +37,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="App">
+      <div className="App" id="app">
       <Navbar />
       <Switch>
         <Route path='/home' render={ () => {
@@ -48,7 +48,6 @@ class App extends React.Component {
           )
         }} />
         <Route path='/families' component={FamilyContainer} />
-        <Route path='/add_item' component={SearchContainer} />
       </Switch>
       </div>
     )
