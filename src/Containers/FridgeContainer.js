@@ -45,10 +45,12 @@ class FridgeContainer extends React.Component {
                 "Accept": "application/json",
                 "Content-type": "application/json"
             },
-            body: JSON.stringify({ fdc_id: itemObj.fdcId, fdc_description: itemObj.description, data_type: itemObj.dataType })
+            body: JSON.stringify({ fdc_id: itemObj.fdcId, fdc_description: itemObj.description, data_type: itemObj.dataType})
         })
             .then(r => r.json())
             .then(returnedItem => {
+                returnedItem.amountNum = itemObj.amountNum
+                returnedItem.amountType = itemObj.amountType
                 console.log(returnedItem)
                 this.createFridgeItem(returnedItem)
                     .then(r => r.json())
@@ -66,7 +68,7 @@ class FridgeContainer extends React.Component {
                 "Accept": "application/json",
                 "Content-type": "application/json"
             },
-            body: JSON.stringify({ fridge_id: this.props.fridge.id, item_id: itemObj.id })
+            body: JSON.stringify({ fridge_id: this.props.fridge.id, item_id: itemObj.id, amount_num: itemObj.amountNum, amount_type: itemObj.amountType  })
         })
     }
 

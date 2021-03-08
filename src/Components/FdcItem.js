@@ -8,7 +8,7 @@ class FdcItem extends React.Component {
 
     clickHandler = ()=> {
         // this.props.addItem(this.props.food)
-        this.props.modalController()
+        this.props.modalController(this.props.food)
     }
 
     render(){

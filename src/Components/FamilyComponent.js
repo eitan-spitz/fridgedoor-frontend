@@ -16,6 +16,7 @@ class FamilyComponent extends React.Component {
 
     componentDidMount(){
         if(this.props.user){
+            console.log(this.props.user)
             let userFamily = this.props.user.userFamilies[0].familyId
             fetch(`http://localhost:3000/families/${userFamily}`,{
                 method: "GET",

@@ -9,7 +9,8 @@ class SearchContainer extends React.Component {
         query: '',
         apiResponse: null,
         fetched: false,
-        showModal: false
+        showModal: false,
+        food: {}
     }
 
     fdcData = {
@@ -45,9 +46,22 @@ class SearchContainer extends React.Component {
     }
 
 
-    modalController = ()=>{
-        console.log(this.state.showModal)
+    modalController = (food)=>{
         this.setState({showModal: !this.state.showModal})
+        if(food){
+            this.setState({food: food})
+        }
+    }
+
+    submitHandler = (e) => {
+        e.preventDefault()
+        console.log(e.target.amountNum.value, e.target.amountType.value)
+        this.modalController()
+        let food = this.state.food
+        food.amountNum = e.target.amountNum.value
+        food.amountType = e.target.amountType.value
+        console.log("in submit handler",food)
+        this.props.addItem(food)
     }
 
     render(){
@@ -55,7 +69,16 @@ class SearchContainer extends React.Component {
             <>
                 <FdcSearch query={this.state.query} fetched={this.state.fetched} changeHandler={this.changeHandler} searchFetch={this.searchFetch} />
                 {this.formatFoods()}
-                <ReactModal isOpen={this.state.showModal} onRequestClose={this.modalController} ariaHideApp={false} />
+                <ReactModal isOpen={this.state.showModal} onRequestClose={this.modalController} ariaHideApp={false} >
+                    <form onSubmit={this.submitHandler} >
+                        <label>Amount:</label>
+                        <input type="number" placeholder="Amount" name="amountNum" />
+                        <select name="amountType" id="amountType">
+                            <option value="cup" >Cup</option>
+                        </select>
+                        <button>Add Item</button>
+                    </form>
+                </ReactModal>
             </>
         )
     }

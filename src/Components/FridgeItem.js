@@ -14,13 +14,21 @@ class FridgeItem extends React.Component {
         this.setState({show: false})
     }
 
+    formatAmountType = () => {
+        if(parseInt(this.props.fridgeItem.amountNum) > 1){
+            return (this.props.fridgeItem.amountType + "s")
+        } else {
+            return this.props.fridgeItem.amountType
+        }
+    }
+
     render(){
         return(
             <>
             {this.state.show ? 
                 <>
                     <h4>{this.description}</h4>
-                    <h5>{this.props.fridgeItem.amountNum} {this.props.fridgeItem.amountType}</h5>
+                    <h5>{this.props.fridgeItem.amountNum} {this.formatAmountType()}</h5>
                     <button onClick={this.localDeleteItem} >Delete</button>
                 </>
             :
