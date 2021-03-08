@@ -11,7 +11,8 @@ class FamilyComponent extends React.Component {
     state = {
         fridges: [],
         shoppinglists: [],
-        familyId: null
+        familyId: null,
+        updatedFridge: null
     }
 
     componentDidMount(){
@@ -34,10 +35,24 @@ class FamilyComponent extends React.Component {
         }
     }
 
+    getFridge = (fridgeId) => {
+        fetch(`http://localhost:3000/families/${this.state.familyId}/fridges/${fridgeId}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            }
+        })
+        .then(r=>r.json())
+        .then(returnedFridge => {
+            console.log(returnedFridge)
+            this.setState({updatedFridge: returnedFridge})
+        })
+    }
 
 
     arrayOfFridgeCards = () => {
-        return this.state.fridges.map(fridge => <FridgeCard fridge={fridge} familyId={this.state.familyId} key={fridge.id} />)
+        return this.state.fridges.map(fridge => <FridgeCard fridge={fridge} familyId={this.state.familyId} key={fridge.id} getFridge={this.getFridge} />)
     }
 
     arrayOfShoppingCards = () => {
@@ -51,7 +66,12 @@ class FamilyComponent extends React.Component {
                 <Switch>
                     <Route path="/families/fridges/:id" render={(routerProps)=>{
                         const fridgeId = routerProps.match.params.id
-                        const foundFridge = this.state.fridges.find(fridge => fridge.id === parseInt(fridgeId))
+                        let foundFridge
+                        if (this.state.updatedFridge) {
+                            foundFridge = this.state.updatedFridge
+                        } else {
+                            foundFridge = this.state.fridges.find(fridge => fridge.id === parseInt(fridgeId))
+                        }
                         let fridgeComponent
                         if(foundFridge){
                             fridgeComponent = <FridgeContainer fridge={foundFridge} familyId={this.state.familyId} key={foundFridge.id} />

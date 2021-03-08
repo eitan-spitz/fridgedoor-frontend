@@ -56,7 +56,16 @@ class FridgeContainer extends React.Component {
                     .then(r => r.json())
                     .then(returnedFridgeItem => {
                         console.log(returnedFridgeItem)
-                        this.setState({ items: [...this.state.items, returnedItem], fridgeItems: [...this.state.fridgeItems, returnedFridgeItem] })
+                        let fridgeItemIndex = this.state.fridgeItems.findIndex((fridgeItem) => fridgeItem.id === returnedFridgeItem.id)
+                        console.log(fridgeItemIndex)
+                        if (fridgeItemIndex >= 0){
+                            console.log("in if fridgeItemIndex")
+                            let newArray = [...this.state.fridgeItems]
+                            newArray[fridgeItemIndex] = returnedFridgeItem
+                            this.setState({ items: [...this.state.items, returnedItem], fridgeItems: newArray })
+                        } else {
+                            this.setState({ items: [...this.state.items, returnedItem], fridgeItems: [...this.state.fridgeItems, returnedFridgeItem] })
+                        }
                     })
             })
     }
@@ -71,6 +80,8 @@ class FridgeContainer extends React.Component {
             body: JSON.stringify({ fridge_id: this.props.fridge.id, item_id: itemObj.id, amount_num: itemObj.amountNum, amount_type: itemObj.amountType  })
         })
     }
+
+ 
 
 
     render() {
