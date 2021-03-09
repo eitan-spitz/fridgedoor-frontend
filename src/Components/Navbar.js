@@ -8,11 +8,11 @@ const Navbar = (props) => {
             <div className="nav-logo">
 
             </div>
-            <div className="nav-buttons">
-                <NavLink to='/families/fridges' >Fridges</NavLink>
-                <NavLink to='/families/shopping' >Shopping List</NavLink>
-                <NavLink to='/home' >Home </NavLink>
-            </div>
+            <ul className="nav-buttons">
+                <NavLink to='/home' style={{ color: 'inherit', textDecoration: 'inherit'}} ><li>Home</li></NavLink>
+                <NavLink to='/families/fridges' style={{ color: 'inherit', textDecoration: 'inherit'}} ><li>Fridges</li></NavLink>
+                <NavLink to='/families/shopping' style={{ color: 'inherit', textDecoration: 'inherit'}} ><li>Shopping List</li></NavLink>
+            </ul>
         </div>
     )
 }

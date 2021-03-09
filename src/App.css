@@ -58,3 +58,26 @@ body{
   float: left;
 }
 
+.navbar{
+  display: inline-block;
+  width: 100%;
+}
+
+.nav-logo{
+  float: left;
+  width: 20%;
+}
+
+.nav-buttons{
+  display: flex;
+  float: left;
+  height: 20px;
+  list-style: none;
+  text-decoration: none;
+  width: 80%;
+}
+
+.nav-buttons li{
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
