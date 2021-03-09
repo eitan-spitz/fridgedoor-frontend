@@ -94,7 +94,15 @@ class FridgeContainer extends React.Component {
                             <div className="container">
                                 <div className="fridge">
                                     <h2>{this.props.fridge.name}</h2>
-                                    {this.arrayOfItems()}
+                                    <ul className="fridgeItems">
+                                        <li>
+                                            <h4><span className="description">Desctiption</span></h4>
+                                            <h4><span className="amount">Quantity</span></h4>
+                                            <h4><span className="unit">Unit</span></h4>
+                                            <h4><span className="dltButton"></span></h4>
+                                        </li>
+                                        {this.arrayOfItems()}
+                                    </ul>
                                 </div>
                                 <div className="search">
                                     <SearchContainer addItem={this.addItem} modalController={this.modalController} />

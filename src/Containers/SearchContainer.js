@@ -68,7 +68,9 @@ class SearchContainer extends React.Component {
         return(
             <>
                 <FdcSearch query={this.state.query} fetched={this.state.fetched} changeHandler={this.changeHandler} searchFetch={this.searchFetch} />
-                {this.formatFoods()}
+                <ul className="fdcItems">
+                    {this.formatFoods()}
+                </ul>
                 <ReactModal isOpen={this.state.showModal} onRequestClose={this.modalController} ariaHideApp={false} >
                     <form onSubmit={this.submitHandler} >
                         <label>Amount:</label>

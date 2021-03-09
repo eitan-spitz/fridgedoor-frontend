@@ -26,11 +26,16 @@ class FridgeItem extends React.Component {
         return(
             <>
             {this.state.show ? 
-                <>
-                    <h4>{this.description}</h4>
+                <li key={this.props.fridgeItem.id}>
+                    <h5><span className="description">{this.description}</span></h5>
+                    <h5><span className="amount">{this.props.fridgeItem.amountNum}</span></h5>
+                    <h5><span className="unit">{this.formatAmountType()}</span></h5>
+                    <span className="dltButton"><button onClick={this.localDeleteItem} >Delete</button></span>
+
+                    {/* <h4>{this.description}</h4>
                     <h5>{this.props.fridgeItem.amountNum} {this.formatAmountType()}</h5>
-                    <button onClick={this.localDeleteItem} >Delete</button>
-                </>
+                    <button onClick={this.localDeleteItem} >Delete</button> */}
+                </li>
             :
                 ''
             }

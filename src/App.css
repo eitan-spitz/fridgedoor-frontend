@@ -21,3 +21,40 @@ body{
 .search{
   grid-area: search;
 }
+
+.fridgeItems{
+  width: 100%;
+  display: inline-block;
+}
+
+.fridgeItems li{
+  display: inline-block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.description{
+  width: 40%;
+  float: left;
+}
+.amount, .unit, .dltButton{
+  width: 15%;
+  float: left;
+}
+
+.fdcItems{
+  width: 100%;
+  display: inline-block;
+}
+
+.fdcItems li{
+  display: inline-block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.searchDescription, .addButton{
+  width: 50%;
+  float: left;
+}
+
