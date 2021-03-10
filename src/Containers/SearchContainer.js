@@ -10,7 +10,8 @@ class SearchContainer extends React.Component {
         apiResponse: null,
         fetched: false,
         showModal: false,
-        food: {}
+        food: {},
+        onFridge: false
     }
 
     fdcData = {
@@ -19,9 +20,14 @@ class SearchContainer extends React.Component {
         pageSize: 10
       }
 
+    componentDidMount(){
+        this.setState({onFridge: this.props.onFridge})
+    }
+
     changeHandler = (e)=> {
         this.setState({ [e.target.name]: e.target.value, fetched: false})
     }
+
     searchFetch = () => {
         console.log('in fetch')
         fetch(`${this.fdcData.url}api_key=${this.fdcData.apiKey}&query=${this.state.query}&pageSize=${this.fdcData.pageSize}`, {
@@ -55,11 +61,13 @@ class SearchContainer extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        console.log(e.target.amountNum.value, e.target.amountType.value)
+        console.log(e.target)
         this.modalController()
         let food = this.state.food
         food.amountNum = e.target.amountNum.value
-        food.amountType = e.target.amountType.value
+        if(e.target.amountType){
+            food.amountType = e.target.amountType.value
+        }
         console.log("in submit handler",food)
         this.props.addItem(food)
     }
@@ -75,9 +83,16 @@ class SearchContainer extends React.Component {
                     <form onSubmit={this.submitHandler} >
                         <label>Amount:</label>
                         <input type="number" placeholder="Amount" name="amountNum" />
-                        <select name="amountType" id="amountType">
-                            <option value="cup" >Cup</option>
-                        </select>
+
+                        {this.state.onFridge ?
+                            <select name="amountType" id="amountType">
+                                <option value="cup" >Cup</option>
+                            </select>
+                            :
+                            ''
+                        }
+
+
                         <button>Add Item</button>
                     </form>
                 </ReactModal>

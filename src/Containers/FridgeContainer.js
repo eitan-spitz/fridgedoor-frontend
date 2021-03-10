@@ -77,7 +77,7 @@ class FridgeContainer extends React.Component {
                 "Accept": "application/json",
                 "Content-type": "application/json"
             },
-            body: JSON.stringify({ fridge_id: this.props.fridge.id, item_id: itemObj.id, amount_num: itemObj.amountNum, amount_type: itemObj.amountType  })
+            body: JSON.stringify({ fridge_id: this.props.fridge.id, item_id: itemObj.id, amount_num: itemObj.amountNum, amount_type: itemObj.amountType })
         })
     }
 
@@ -91,12 +91,11 @@ class FridgeContainer extends React.Component {
                     <Route path='/families/fridges/:id' render={() => {
                         return (
                             <>
-                            <div className="container">
                                 <div className="fridge">
                                     <h2>{this.props.fridge.name}</h2>
                                     <ul className="fridgeItems">
                                         <li>
-                                            <h4><span className="description">Desctiption</span></h4>
+                                            <h4><span className="description">Name</span></h4>
                                             <h4><span className="amount">Quantity</span></h4>
                                             <h4><span className="unit">Unit</span></h4>
                                             <h4><span className="dltButton"></span></h4>
@@ -105,9 +104,8 @@ class FridgeContainer extends React.Component {
                                     </ul>
                                 </div>
                                 <div className="search">
-                                    <SearchContainer addItem={this.addItem} modalController={this.modalController} />
+                                    <SearchContainer addItem={this.addItem} onFridge={true}/>
                                 </div>
-                            </div>
 
                             </>
                         )

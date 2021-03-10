@@ -82,7 +82,7 @@ class FamilyComponent extends React.Component {
                     }} />
                     <Route path="/families/fridges" render={()=>{
                         return(
-                            <div>
+                            <div className="fridgeCards">
                                 {this.arrayOfFridgeCards()}
                             </div>
                         )
@@ -100,7 +100,7 @@ class FamilyComponent extends React.Component {
                     }} />
                     <Route path="/families/shopping" render={()=>{
                         return(
-                            <div>
+                            <div className="shoppingCards">
                                 {this.arrayOfShoppingCards()}
                             </div>
                         )

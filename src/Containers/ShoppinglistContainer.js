@@ -18,7 +18,7 @@ class ShoppinglistContainer extends React.Component {
     arrayOfItems = () => {
         return this.state.shoppingItems.map(shoppingItem => {
             let item = this.state.items.find(item => item.id === shoppingItem.itemId)
-            return <ShoppingItem item={item} deleteItem={this.deleteItem} key={item.id} shoppingItem={shoppingItem} />
+            return <ShoppingItem item={item} deleteItem={this.deleteItem} key={shoppingItem.id} shoppingItem={shoppingItem} />
         })
     }
 
@@ -47,12 +47,23 @@ class ShoppinglistContainer extends React.Component {
         })
             .then(r => r.json())
             .then(returnedItem => {
+                returnedItem.amountNum = itemObj.amountNum
+                returnedItem.amountType = itemObj.amountType
                 console.log(returnedItem)
                 this.createShoppingItem(returnedItem)
                     .then(r => r.json())
                     .then(returnedShoppingItem => {
                         console.log(returnedShoppingItem)
-                        this.setState({ items: [...this.state.items, returnedItem], shoppingItems: [...this.state.shoppingItems, returnedShoppingItem] })
+                        let shoppingItemIndex = this.state.shoppingItems.findIndex((shoppingItem) => shoppingItem.id === returnedShoppingItem.id)
+                        console.log(shoppingItemIndex)
+                        if (shoppingItemIndex >= 0){
+                            console.log("in if shoppingItemIndex")
+                            let newArray = [...this.state.shoppingItems]
+                            newArray[shoppingItemIndex] = returnedShoppingItem
+                            this.setState({ items: [...this.state.items, returnedItem], shoppingItems: newArray })
+                        } else {
+                            this.setState({ items: [...this.state.items, returnedItem], shoppingItems: [...this.state.shoppingItems, returnedShoppingItem] })
+                        }
                     })
             })
     }
@@ -64,7 +75,7 @@ class ShoppinglistContainer extends React.Component {
                 "Accept": "application/json",
                 "Content-type": "application/json"
             },
-            body: JSON.stringify({ shoppinglist_id: this.props.shoppinglist.id, item_id: itemObj.id })
+            body: JSON.stringify({ shoppinglist_id: this.props.shoppinglist.id, item_id: itemObj.id, amount_num: itemObj.amountNum, amount_type: itemObj.amountType })
         })
     }
 
@@ -74,15 +85,22 @@ class ShoppinglistContainer extends React.Component {
                 <Switch>
                     <Route path='/families/shopping/:id' render={() => {
                         return (
-                            <div className="container">
+                            <>
                                 <div className="shoppinglist">
                                     <h2>{this.props.shoppinglist.name}</h2>
-                                    {this.arrayOfItems()}
+                                    <ul className="shoppingItems">
+                                    <li>
+                                            <h4><span className="description">Name</span></h4>
+                                            <h4><span className="amount">Quantity</span></h4>
+                                            <h4><span className="dltButton"></span></h4>
+                                        </li>
+                                        {this.arrayOfItems()}
+                                    </ul>
                                 </div>
                                 <div className="search">
-                                    <SearchContainer addItem={this.addItem} />
+                                    <SearchContainer addItem={this.addItem} onFridge={false} />
                                 </div>
-                            </div>
+                            </>
                         )
                     }} />
                 </Switch>

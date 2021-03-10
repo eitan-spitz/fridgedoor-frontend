@@ -36,7 +36,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="App" id="app">
+      <div className="App container" id="app">
       <Navbar />
       <Switch>
         <Route path='/home' render={ () => {

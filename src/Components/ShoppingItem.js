@@ -16,16 +16,17 @@ class ShoppingItem extends React.Component {
 
     render(){
         return(
-            <>
+            <li  key={this.props.shoppingItem.id}>
             {this.state.show ? 
                 <>
-                    <h4>{this.description}</h4>
-                    <button onClick={this.localDeleteItem} >Delete</button>
+                    <h5><span className="description">{this.description}</span></h5>
+                    <h5><span className="amount">{this.props.shoppingItem.amountNum}</span></h5>
+                    <span className="dltButton"><button onClick={this.localDeleteItem} >-</button></span>
                 </>
             :
                 ''
             }
-            </>
+            </li>
         )
     }
 }

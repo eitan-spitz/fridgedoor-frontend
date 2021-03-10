@@ -7,14 +7,14 @@ body{
 .container{
   display: grid;
   grid-template-columns: 15% 1fr 30%;
-  grid-template-rows: 5% 1fr 5%;
+  grid-template-rows: 10% 1fr 5%;
   grid-template-areas: 
     "navbar navbar navbar"
     "menu main search"
     "footer footer footer";
 }
 
-.fridge, .shoppinglist{
+.fridge, .fridgeCards, .shoppinglist, .shoppingCards{
   grid-area: main;
 }
 
@@ -28,6 +28,12 @@ body{
 }
 
 .fridgeItems li{
+  display: inline-block;
+  text-decoration: none;
+  width: 100%;
+}
+
+.shoppingItems li{
   display: inline-block;
   text-decoration: none;
   width: 100%;
@@ -60,6 +66,7 @@ body{
 
 .navbar{
   display: inline-block;
+  grid-area: navbar;
   width: 100%;
 }
 
@@ -78,6 +85,6 @@ body{
 }
 
 .nav-buttons li{
-  padding: 0.5rem;
+  padding-right: 1rem;
   font-size: 1.2rem;
 }
