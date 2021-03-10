@@ -5,6 +5,7 @@ import FamilyContainer from './Containers/FamilyContainer';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { loginUser } from './Redux/actions';
+import Footer from './Components/Footer'
 import Navbar from './Components/Navbar';
 
 
@@ -36,7 +37,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="App container" id="app">
+      <div className="container" id="app">
       <Navbar />
       <Switch>
         <Route path='/home' render={ () => {
@@ -48,6 +49,7 @@ class App extends React.Component {
         }} />
         <Route path='/families' component={FamilyContainer} />
       </Switch>
+      <Footer />
       </div>
     )
   }

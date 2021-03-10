@@ -103,10 +103,7 @@ class FridgeContainer extends React.Component {
                                         {this.arrayOfItems()}
                                     </ul>
                                 </div>
-                                <div className="search">
-                                    <SearchContainer addItem={this.addItem} onFridge={true}/>
-                                </div>
-
+                                <SearchContainer addItem={this.addItem} onFridge={true}/>
                             </>
                         )
                     }} />
