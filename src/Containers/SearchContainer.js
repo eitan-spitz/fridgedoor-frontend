@@ -74,7 +74,7 @@ class SearchContainer extends React.Component {
 
     render(){
         return(
-            <div className="search">
+            <div className="searchComponent">
                 <h3>Search</h3>
                 <FdcSearch query={this.state.query} fetched={this.state.fetched} changeHandler={this.changeHandler} searchFetch={this.searchFetch} />
                 <ul className="fdcItems">

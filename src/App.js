@@ -5,6 +5,7 @@ import FamilyContainer from './Containers/FamilyContainer';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { loginUser } from './Redux/actions';
+import SideMenu from './Components/SideMenu'
 import Footer from './Components/Footer'
 import Navbar from './Components/Navbar';
 
@@ -49,7 +50,7 @@ class App extends React.Component {
         }} />
         <Route path='/families' component={FamilyContainer} />
       </Switch>
-      <Footer />
+      <SideMenu />
       </div>
     )
   }
