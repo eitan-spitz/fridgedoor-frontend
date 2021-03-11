@@ -37,23 +37,16 @@ body{
   color: #383E41;
 }
 
-.fridgeItems{
-  width: 40vw;
-  display: inline-block;
+.fridgeItems, .shoppingItems{
+  padding-inline-start: 0px;
 }
 
-.fridgeItems li{
+.fridgeItems li, .shoppingItems li{
   display: inline-block;
   text-decoration: none;
   width: 100%;
   padding-bottom: 5px;
   border-bottom: #D1D1D6 0.5px solid;
-}
-
-.shoppingItems li{
-  display: inline-block;
-  text-decoration: none;
-  width: 100%;
 }
 
 .description{
@@ -116,7 +109,6 @@ body{
   list-style: none;
   text-decoration: none;
   width: 40%;
-  margin-top: 10px;
 }
 
 .nav-buttons-left li, .nav-buttons-right li{
@@ -157,8 +149,25 @@ body{
 
 .homePage{
   grid-area: main;
-  background-image: url('./images/stockedFridge.png');
-  background-position: center bottom;
+  background-image: url('./images/output-onlinepngtools.png');
+  background-position: center;
   background-repeat: no-repeat;
+  color: #3674A7;
   /* background-size: contain; */
+}
+
+.modalForm{
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.about{
+  grid-area: search;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

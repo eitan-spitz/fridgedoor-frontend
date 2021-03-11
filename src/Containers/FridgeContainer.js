@@ -12,7 +12,6 @@ class FridgeContainer extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         this.setState({ items: this.props.fridge.items, fridgeItems: this.props.fridge.fridgeItems })
     }
 
@@ -33,11 +32,9 @@ class FridgeContainer extends React.Component {
             }
         })
             .then(r => r.json())
-            .then(resp => console.log(resp))
     }
 
     addItem = (itemObj) => {
-        console.log(itemObj)
 
         fetch(`http://localhost:3000/items`, {
             method: "POST",
@@ -51,15 +48,11 @@ class FridgeContainer extends React.Component {
             .then(returnedItem => {
                 returnedItem.amountNum = itemObj.amountNum
                 returnedItem.amountType = itemObj.amountType
-                console.log(returnedItem)
                 this.createFridgeItem(returnedItem)
                     .then(r => r.json())
                     .then(returnedFridgeItem => {
-                        console.log(returnedFridgeItem)
                         let fridgeItemIndex = this.state.fridgeItems.findIndex((fridgeItem) => fridgeItem.id === returnedFridgeItem.id)
-                        console.log(fridgeItemIndex)
                         if (fridgeItemIndex >= 0){
-                            console.log("in if fridgeItemIndex")
                             let newArray = [...this.state.fridgeItems]
                             newArray[fridgeItemIndex] = returnedFridgeItem
                             this.setState({ items: [...this.state.items, returnedItem], fridgeItems: newArray })

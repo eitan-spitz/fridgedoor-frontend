@@ -17,7 +17,6 @@ class FamilyComponent extends React.Component {
 
     componentDidMount(){
         if(this.props.user){
-            console.log(this.props.user)
             let userFamily = this.props.user.userFamilies[0].familyId
             fetch(`http://localhost:3000/families/${userFamily}`,{
                 method: "GET",
@@ -28,7 +27,6 @@ class FamilyComponent extends React.Component {
             })
             .then(r=>r.json())
             .then(family => {
-                console.log(family)
                 this.setState({fridges: family.fridges, shoppinglists: family.shoppinglists, familyId: userFamily})
             })
             .catch(console.log)
@@ -45,7 +43,6 @@ class FamilyComponent extends React.Component {
         })
         .then(r=>r.json())
         .then(returnedFridge => {
-            console.log(returnedFridge)
             this.setState({updatedFridge: returnedFridge})
         })
     }

@@ -11,7 +11,6 @@ class ShoppinglistContainer extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         this.setState({ items: this.props.shoppinglist.items, shoppingItems: this.props.shoppinglist.shoppingItems })
     }
 
@@ -32,11 +31,9 @@ class ShoppinglistContainer extends React.Component {
             }
         })
             .then(r => r.json())
-            .then(resp => console.log(resp))
     }
 
     addItem = (itemObj) => {
-        console.log(itemObj)
         fetch(`http://localhost:3000/items`, {
             method: "POST",
             headers: {
@@ -49,15 +46,11 @@ class ShoppinglistContainer extends React.Component {
             .then(returnedItem => {
                 returnedItem.amountNum = itemObj.amountNum
                 returnedItem.amountType = itemObj.amountType
-                console.log(returnedItem)
                 this.createShoppingItem(returnedItem)
                     .then(r => r.json())
                     .then(returnedShoppingItem => {
-                        console.log(returnedShoppingItem)
                         let shoppingItemIndex = this.state.shoppingItems.findIndex((shoppingItem) => shoppingItem.id === returnedShoppingItem.id)
-                        console.log(shoppingItemIndex)
                         if (shoppingItemIndex >= 0){
-                            console.log("in if shoppingItemIndex")
                             let newArray = [...this.state.shoppingItems]
                             newArray[shoppingItemIndex] = returnedShoppingItem
                             this.setState({ items: [...this.state.items, returnedItem], shoppingItems: newArray })

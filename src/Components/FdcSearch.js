@@ -5,7 +5,6 @@ class FdcSearch extends React.Component {
     componentDidUpdate(){
         if(!this.props.fetched){
             if(this.props.query.length >= 4 ){
-                console.log('length over 4')
                 this.props.searchFetch()
             }
         }

@@ -13,7 +13,7 @@ const Navbar = (props) => {
                 
             </ul>
             <ul className="nav-buttons-right">
-                <NavLink to="#" style={{ color: 'inherit', textDecoration: 'inherit'}}><li>About</li></NavLink>
+                <NavLink to="#" style={{ color: 'inherit', textDecoration: 'inherit'}} onClick={props.showAbout}><li>About</li></NavLink>
                 <NavLink to="#" style={{ color: 'inherit', textDecoration: 'inherit'}}><li>Sign Up</li></NavLink>
                 <NavLink to="#" style={{ color: 'inherit', textDecoration: 'inherit'}} onClick={props.setFamily} ><li>Log In</li></NavLink>
             </ul>

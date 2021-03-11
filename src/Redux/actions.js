@@ -11,7 +11,6 @@ export function loginUser() {
         })
             .then(r => r.json())
             .then(users => {
-                console.log(users)
                 dispatch({type: LOGIN, payload: users[0] })
             })
     }

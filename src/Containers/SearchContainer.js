@@ -29,7 +29,6 @@ class SearchContainer extends React.Component {
     }
 
     searchFetch = () => {
-        console.log('in fetch')
         fetch(`${this.fdcData.url}api_key=${this.fdcData.apiKey}&query=${this.state.query}&pageSize=${this.fdcData.pageSize}`, {
             method: "GET",
             headers: {
@@ -39,7 +38,6 @@ class SearchContainer extends React.Component {
         })
         .then(r => r.json())
         .then(returnedData => {
-            console.log(returnedData)
             this.setState({apiResponse: returnedData.foods, fetched: true})
         })
     }
@@ -61,15 +59,29 @@ class SearchContainer extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        console.log(e.target)
         this.modalController()
         let food = this.state.food
         food.amountNum = e.target.amountNum.value
         if(e.target.amountType){
             food.amountType = e.target.amountType.value
         }
-        console.log("in submit handler",food)
         this.props.addItem(food)
+    }
+    
+    options = () => {
+        const optionTypes = ["Cup", "Liter", "Gram", "Unit"]
+        return optionTypes.map(type => {
+            return <option value={type}>{type}</option>
+        })
+    }
+
+    customStyles = {
+        content: {
+            width: '15%',
+            height: '15%',
+            left: '40vw',
+            top: '35vh'
+        }
     }
 
     render(){
@@ -80,14 +92,13 @@ class SearchContainer extends React.Component {
                 <ul className="fdcItems">
                     {this.formatFoods()}
                 </ul>
-                <ReactModal isOpen={this.state.showModal} onRequestClose={this.modalController} ariaHideApp={false} >
-                    <form onSubmit={this.submitHandler} >
+                <ReactModal isOpen={this.state.showModal} onRequestClose={this.modalController} ariaHideApp={false} style={this.customStyles}>
+                    <form className="modalForm" onSubmit={this.submitHandler} >
                         <label>Amount:</label>
                         <input type="number" placeholder="Amount" name="amountNum" />
-
                         {this.state.onFridge ?
                             <select name="amountType" id="amountType">
-                                <option value="cup" >Cup</option>
+                                {this.options()}
                             </select>
                             :
                             ''

@@ -6,7 +6,7 @@ function ShoppingCard(props){
     return (
         // important detail, props hold family id as well so will come in handy when refactoring pathway
         <div className="shopping-card">
-            <h3>Shopping List Name: {shoppinglist.name}</h3>
+            <h3>{shoppinglist.name}</h3>
             <NavLink to={`/families/shopping/${shoppinglist.id}`} className="link" ><button>Open</button></NavLink> 
             
         </div>
