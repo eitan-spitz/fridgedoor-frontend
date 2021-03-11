@@ -6,21 +6,13 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { loginUser } from './Redux/actions';
 import SideMenu from './Components/SideMenu'
-import Footer from './Components/Footer'
 import Navbar from './Components/Navbar';
 
 
 class App extends React.Component {
 
   state = {
-    query: "cheese"
-  }
-
-  fdcData = {
-    url: "https://api.nal.usda.gov/fdc/v1/foods/search?",
-    apiKey: "CS1Rfy9P2MqeJeHkcNnhBjhyMBJ9d6G5cUSdkOAu",
-    query: this.state.query,
-    pageSize: 5
+    family: null
   }
   
   componentDidMount(){
@@ -36,21 +28,25 @@ class App extends React.Component {
       this.props.login()
   }
 
+  setFamily = () => {
+    this.setState({family: this.props.user.families[0]})
+  }
+
   render(){
     return (
       <div className="container" id="app">
-      <Navbar />
       <Switch>
         <Route path='/home' render={ () => {
           return(
-            <>
+            <div className="homePage">
               <h1>FridgeDoor</h1>
-            </>
+            </div>
           )
         }} />
         <Route path='/families' component={FamilyContainer} />
       </Switch>
-      <SideMenu />
+      <Navbar setFamily={this.setFamily} />
+      <SideMenu family={this.state.family} />
       </div>
     )
   }

@@ -104,6 +104,7 @@ body{
   list-style: none;
   text-decoration: none;
   width: 40%;
+  margin-top: 8px;
 }
 
 .nav-buttons-right{
@@ -115,6 +116,7 @@ body{
   list-style: none;
   text-decoration: none;
   width: 40%;
+  margin-top: 10px;
 }
 
 .nav-buttons-left li, .nav-buttons-right li{
@@ -128,4 +130,35 @@ body{
   background-color: #244564;
   color: white;
   border-right: #22415F 1px solid;
+}
+
+.menuButtons{
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+  width: 65%;
+  padding-inline-start: 0px;
+}
+
+.menuButtons li{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.menuButtons li:hover{
+  background-color: #3674A7;
+  border-radius: 10%;
+}
+
+.menuButtons li h4{
+  padding-left: 1.5rem;
+}
+
+.homePage{
+  grid-area: main;
+  background-image: url('./images/stockedFridge.png');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  /* background-size: contain; */
 }
