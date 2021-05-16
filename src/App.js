@@ -1,7 +1,6 @@
 import './App.css';
 import React from 'react';
 import FamilyContainer from './Containers/FamilyContainer';
-// import {URL} from './index'
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { loginUser } from './Redux/actions';
