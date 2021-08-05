@@ -69,7 +69,7 @@ class SearchContainer extends React.Component {
     }
     
     options = () => {
-        const optionTypes = ["Cup", "Liter", "Gram", "Unit"]
+        const optionTypes = ["Oz", "Gallon", "Pound", "Unit"]
         return optionTypes.map(type => {
             return <option value={type}>{type}</option>
         })
@@ -103,8 +103,6 @@ class SearchContainer extends React.Component {
                             :
                             ''
                         }
-
-
                         <button>Add Item</button>
                     </form>
                 </ReactModal>
